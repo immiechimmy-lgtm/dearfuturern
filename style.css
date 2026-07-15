@@ -1,0 +1,154 @@
+/* Custom Styles for Pink Nursing Envelope Design Layout */
+
+/* Body Reset override */
+body {
+    background-color: #ffe4e6; /* Soft pink background match */
+}
+
+/* Envelope Container Treatment */
+.envelope-container {
+    background-image: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    box-shadow: 0 10px 25px -5px rgba(244, 63, 94, 0.2), 0 8px 10px -6px rgba(244, 63, 94, 0.2);
+}
+
+/* Form Input Elements */
+.input-field {
+    display: block;
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.875rem;
+    color: #1f2937;
+    background-color: #ffffff;
+    border: 1px solid #fda4af; /* Soft rose border tint */
+    border-radius: 0.5rem;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+}
+
+.input-field:focus {
+    border-color: #f43f5e; /* Vibrant Rose focus */
+    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.2);
+}
+
+/* Primary Button Action: Sweet Heart Pink */
+.btn-primary {
+    background-color: #f43f5e; /* Rose 500 */
+    color: #ffffff;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgba(244, 63, 94, 0.2);
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    background-color: #e11d48; /* Rose 600 */
+    transform: translateY(-1px);
+}
+
+/* Secondary Button Action: Charcoal Slate */
+.btn-secondary {
+    background-color: #4b5563; /* Gray 600 */
+    color: #ffffff;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: #374151; /* Gray 700 */
+    transform: translateY(-1px);
+}
+
+/* Output Styling Configurations */
+#outputArea {
+    text-align: left;
+}
+
+/* Custom Envelope 3D Open Mechanics */
+.envelope {
+    perspective: 1000px;
+}
+
+/* Flap transition for 180 degree folding animation */
+.envelope-flap {
+    transform-origin: top;
+    transform: rotateX(0deg);
+    z-index: 30;
+}
+
+/* Custom class triggers via JavaScript execution */
+.envelope-flap.open {
+    transform: rotateX(180deg);
+    z-index: 0;
+}
+
+/* Input Fields */
+.input-field {
+    display: block;
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.875rem;
+    color: #1e293b;
+    background-color: #ffffff;
+    border: 1px solid #fda4af;
+    border-radius: 0.5rem;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+}
+.input-field:focus {
+    border-color: #f43f5e;
+    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.2);
+}
+
+/* Primary Button Styling */
+.btn-primary {
+    background-color: #f43f5e;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgba(244, 63, 94, 0.1);
+    transition: all 0.2s ease;
+}
+.btn-primary:hover {
+    background-color: #e11d48;
+    transform: translateY(-1px);
+}
+
+/* Secondary Button Styling */
+.btn-secondary {
+    background-color: #475569;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+.btn-secondary:hover {
+    background-color: #334155;
+    transform: translateY(-1px);
+}
+
+/* 1. Set bac.png as the background of the entire website */
+body {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)), url('bac.png');
+    background-attachment: fixed;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+/* 2. Set bac.png as the background of the envelope container */
+#envelopeStage, .envelope-container { 
+   background-image: linear-gradient(rgba(255, 255, 255, 0.45), rgba(255, 255, 255, 0.45)), url('bac.png') !important;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}

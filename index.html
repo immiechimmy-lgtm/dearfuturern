@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nursing Legacy Memory Capsule</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-rose-100 text-slate-800 min-h-screen flex items-center justify-center p-4 font-sans relative overflow-x-hidden selection:bg-rose-200">
+
+    <div id="envelopeStage" class="fixed inset-0 bg-rose-100 z-50 flex flex-col items-center justify-center transition-all duration-1000 ease-in-out p-4">
+        
+        <div class="envelope relative w-full max-w-md h-72 bg-[#fefaf0] shadow-2xl border-4 border-white rounded-lg transition-transform duration-500">
+            
+            <div id="envelopeFlap" class="envelope-flap absolute top-0 left-0 w-full h-0 border-l-[215px] border-l-transparent border-r-[215px] border-r-transparent border-t-[140px] border-t-[#ebdcc3] origin-top transition-transform duration-700 z-30"></div>
+            
+            <div class="absolute bottom-0 left-0 w-0 h-0 border-l-[215px] border-l-[#f5ebd6] border-t-[140px] border-t-transparent z-20 pointer-events-none"></div>
+            <div class="absolute bottom-0 right-0 w-0 h-0 border-r-[215px] border-r-[#f5ebd6] border-t-[140px] border-t-transparent z-20 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-full h-[142px] bg-[#fdf6e6] rounded-b-lg border-t border-stone-200/50 z-10 pointer-events-none"></div>
+
+            <div id="envelopeFrontText" class="absolute inset-0 flex flex-col items-center justify-center z-20 transition-all duration-500 p-6 text-center">
+                <p class="text-xs tracking-widest font-bold text-rose-500 uppercase mb-1">To: Future RN</p>
+                <p class="text-xs tracking-widest font-bold text-slate-400 uppercase mb-4">From: Your Past Self</p>
+                <p class="text-[11px] font-medium tracking-wide text-slate-400 italic animate-pulse mt-4">click the seal to open</p>
+            </div>
+
+            <button id="envelopeSeal" class="absolute top-[120px] left-1/2 -translate-x-1/2 -translate-y-1/2 bg-rose-500 hover:bg-rose-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95 z-40 cursor-pointer">
+                <i id="sealIcon" class="fa-solid fa-heart text-xl animate-bounce"></i>
+            </button>
+
+            <div id="envelopeLetter" class="absolute left-6 right-6 top-4 bg-white border border-rose-100 rounded-xl shadow-md p-6 text-center transform scale-95 opacity-0 z-0 transition-all duration-1000 ease-out pointer-events-none">
+                <h1 class="text-xl font-black text-rose-600 tracking-tight leading-tight uppercase">
+                    Nursing Legacy<br>Memory Capsule
+                </h1>
+                <p class="text-xs font-semibold text-slate-400 tracking-wider mt-3">Some moments deserve to be kept</p>
+                <p class="text-lg font-black text-rose-500 tracking-wide uppercase italic mt-0.5">Forever.</p>
+                
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="mainWebsiteStage" class="w-full max-w-xl mx-auto space-y-8 my-6 opacity-0 transition-all duration-1000 translate-y-8 pointer-events-none">
+        
+        <div class="bg-white rounded-2xl shadow-xl border border-rose-100 p-6 md:p-8 space-y-6 relative overflow-hidden">
+            <div class="absolute top-0 right-0 bg-rose-500/10 text-rose-500 p-4 rounded-bl-3xl text-3xl">
+                <i class="fa-solid fa-user-nurse"></i>
+            </div>
+
+            <div>
+                <h2 class="text-2xl font-black text-slate-900 flex items-center gap-2">
+                    Hello future RN!
+                </h2>
+                <p class="text-sm text-slate-600 leading-relaxed mt-3">
+                    Every nursing journey is made up of unforgettable moments—late-night study sessions, first clinical experiences, victories, challenges, and the people who made them meaningful.
+                </p>
+                <p class="text-sm text-slate-600 leading-relaxed mt-2">
+                    Take a few minutes to write something that your future self will be grateful to read.
+                </p>
+            </div>
+
+            <div class="bg-rose-50 border border-rose-200 rounded-xl p-4 text-center">
+                <h3 class="text-xs font-bold text-rose-600 tracking-widest uppercase flex items-center justify-center gap-2">
+                    ❤️ One Simple Rule
+                </h3>
+                <p class="text-base font-black text-rose-700 mt-1">Write from the heart &lt;3</p>
+                <p class="text-xs text-rose-600/90 mt-1 max-w-xs mx-auto">
+                    There are no perfect words, no right or wrong answers. Be honest, be yourself, and let this capsule capture who you are today.
+                </p>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 rounded-xl p-4">
+                <span class="text-xs font-bold text-slate-500 block mb-2 uppercase tracking-wider">
+                    👉 Take your time. Write about:
+                </span>
+                <ul class="text-xs text-slate-700 space-y-1.5 font-medium">
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-rose-400"></i> your hopes and dreams</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-rose-400"></i> lessons you've learned</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-rose-400"></i> people you're thankful for</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-rose-400"></i> memories you never want to forget</li>
+                    <li class="flex items-center gap-2"><i class="fa-solid fa-check text-rose-400"></i> a message for your future self</li>
+                </ul>
+                <p class="text-[11px] text-slate-400 italic mt-3 pt-2 border-t border-slate-200">
+                    When you're finished, your words will become part of your Nursing Legacy Memory Capsule—a reminder of where your journey began.
+                </p>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-xl border border-rose-100 overflow-hidden">
+            
+            <div class="p-6 md:p-8 border-b border-rose-50">
+                <h3 class="text-base font-bold text-slate-900 mb-4 flex items-center gap-2">
+                    <i class="fa-solid fa-lock text-rose-500"></i> Seal a New Memory
+                </h3>
+                
+                <form id="capsuleForm" class="space-y-4">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Student ID / Number</label>
+                            <input type="text" id="studentId" required placeholder="Enter ID" class="input-field">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Full Name</label>
+                            <input type="text" id="studentName" required placeholder="Enter Full Name" class="input-field">
+                        </div>
+                    </div>
+                    <!-- NEW EMAIL FIELD -->
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Email Address</label>
+                        <input type="email" id="studentEmail" required placeholder="futureRN@email.com" class="input-field">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Letter to your Future Self</label>
+                        <textarea id="capsuleText" rows="4" required placeholder="Write your letter here..." class="input-field"></textarea>
+                    </div>
+                    <div class="p-3 bg-rose-50 border border-rose-200 rounded-xl flex items-center gap-3">
+    <div class="text-rose-500 text-lg pl-1">
+        <i class="fa-solid fa-clock-rotate-left animate-pulse"></i>
+    </div>
+    <div>
+        <p class="text-xs font-bold text-slate-700 uppercase leading-none">Constant Release Date Set</p>
+        <p class="text-[10px] text-slate-500 mt-1">This legacy capsule is scheduled to auto-unlock on <strong>May 29, 2027</strong>.</p>
+    </div>
+</div>
+                    <button type="submit" class="btn-primary w-full py-3 flex items-center justify-center gap-2 font-bold text-sm tracking-wide">
+                        <i class="fa-solid fa-cube"></i> Encrypt & Seal Capsule
+                    </button>
+                </form>
+            </div>
+
+            <!-- Redirect to Unlock Page Section (Clean & Centered) -->
+            <div class="p-6 md:p-8 bg-slate-50/50 text-center border-t border-rose-50">
+                <h3 class="text-base font-bold text-slate-900 mb-2 flex items-center justify-center gap-2">
+                    <i class="fa-solid fa-key text-rose-500"></i> Ready to Decrypt?
+                </h3>
+                <p class="text-xs text-slate-500 max-w-xs mx-auto mb-4">
+                    If the time has come to open your letter, head over to the secure decryption page to open your envelope.
+                </p>
+                <a href="unlock.html" class="btn-secondary w-full py-3 inline-flex items-center justify-center gap-2 font-bold text-sm tracking-wide no-underline">
+                    <i class="fa-solid fa-envelope-open-text"></i> Go to Unlock & Decrypt Page
+                </a>
+            </div>
+
+        </div> <!-- This closes the white card container! -->
+
+        <!-- Beautifully Centered Footer at the very bottom of the page -->
+        <div class="text-center text-xs text-rose-400/80 font-medium pb-8 pt-4">
+            Nursing Legacy Capsule © 2026 • Sealed with Privacy
+        </div>
+
+    </div> <!-- This closes mainWebsiteStage! -->
+
+    <script src="script.js"></script>
+</body>
+</html>

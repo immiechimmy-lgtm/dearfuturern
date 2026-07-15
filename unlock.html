@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unlock Your Legacy Memory Capsule</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/crypto-js.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-rose-100 text-slate-800 min-h-screen flex items-center justify-center p-4 font-sans relative overflow-x-hidden selection:bg-rose-200">
+
+    <!-- STAGE 1: Search and Authenticate -->
+    <div id="searchStage" class="w-full max-w-md bg-white rounded-2xl shadow-xl border border-rose-100 p-6 md:p-8 space-y-6 transition-all duration-500">
+        <div class="text-center">
+            <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-rose-50 text-rose-500 mb-4 text-3xl">
+                <i class="fa-solid fa-key"></i>
+            </div>
+            <h2 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Open Your Capsule</h2>
+            <p class="text-xs text-slate-500 font-medium mt-1">Enter your details to retrieve your nursing legacy</p>
+        </div>
+
+        <div class="space-y-4">
+            <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Student ID / Number</label>
+                <input type="text" id="searchId" placeholder="Enter ID" class="input-field">
+            </div>
+            <div>
+                <label class="block text-xs font-bold text-slate-500 uppercase mb-1">Full Name</label>
+                <input type="text" id="searchName" placeholder="Enter Full Name" class="input-field">
+            </div>
+            
+            <button id="retrieveBtn" class="btn-primary w-full py-3 flex items-center justify-center gap-2 font-bold text-sm tracking-wide">
+                <i class="fa-solid fa-envelope-open-text"></i> Unlock & Decrypt Legacy
+            </button>
+        </div>
+
+        <!-- System Message Box -->
+        <div id="statusMessage" class="hidden p-4 rounded-xl border text-sm font-medium transition-all duration-300"></div>
+        
+        <div class="text-center pt-2">
+            <a href="index.html" class="text-xs text-rose-500 hover:text-rose-600 font-bold transition-colors">
+                <i class="fa-solid fa-arrow-left mr-1"></i> Go back to Seal a Capsule
+            </a>
+        </div>
+    </div>
+
+    <!-- STAGE 2: Interactive Envelope Reveal (Hidden by Default) -->
+    <div id="envelopeStage" class="fixed inset-0 bg-rose-100 z-50 flex-col items-center justify-center transition-all duration-1000 ease-in-out p-4 hidden opacity-0">
+        
+        <div class="envelope relative w-full max-w-md h-72 bg-[#fefaf0] shadow-2xl border-4 border-white rounded-lg transition-transform duration-500">
+            
+            <!-- Flap -->
+            <div id="envelopeFlap" class="envelope-flap absolute top-0 left-0 w-full h-0 border-l-[215px] border-l-transparent border-r-[215px] border-r-transparent border-t-[140px] border-t-[#ebdcc3] origin-top transition-transform duration-700 z-30"></div>
+            
+            <!-- Left and Right Inside Folds -->
+            <div class="absolute bottom-0 left-0 w-0 h-0 border-l-[215px] border-l-[#f5ebd6] border-t-[140px] border-t-transparent z-20 pointer-events-none"></div>
+            <div class="absolute bottom-0 right-0 w-0 h-0 border-r-[215px] border-r-[#f5ebd6] border-t-[140px] border-t-transparent z-20 pointer-events-none"></div>
+            <div class="absolute bottom-0 left-0 w-full h-[142px] bg-[#fdf6e6] rounded-b-lg border-t border-stone-200/50 z-10 pointer-events-none"></div>
+
+            <!-- Envelope Front Label -->
+            <div id="envelopeFrontText" class="absolute inset-0 flex flex-col items-center justify-center z-20 transition-all duration-500 p-6 text-center">
+                <p class="text-xs tracking-widest font-bold text-rose-500 uppercase mb-1">Nursing Memory Capsule</p>
+                <p id="recipientLabel" class="text-sm font-black text-slate-800 uppercase mb-4"></p>
+                <p class="text-[11px] font-medium tracking-wide text-slate-400 italic animate-pulse mt-4">click the seal to open</p>
+            </div>
+
+            <!-- Wax Seal Button -->
+            <button id="envelopeSeal" class="absolute top-[120px] left-1/2 -translate-x-1/2 -translate-y-1/2 bg-rose-500 hover:bg-rose-600 text-white rounded-full w-14 h-14 flex items-center justify-center shadow-lg transition-all transform hover:scale-110 active:scale-95 z-40 cursor-pointer">
+                <i id="sealIcon" class="fa-solid fa-heart text-xl animate-bounce"></i>
+            </button>
+
+            <!-- Decrypted Letter Sliding Out -->
+            <div id="envelopeLetter" class="absolute left-4 right-4 top-4 bg-white border border-rose-100 rounded-xl shadow-md p-6 max-h-[380px] overflow-y-auto transform scale-95 opacity-0 z-0 transition-all duration-1000 ease-out pointer-events-none">
+                <div class="text-center border-b border-rose-100 pb-4 mb-4">
+                    <h1 class="text-lg font-black text-rose-600 tracking-tight leading-tight uppercase">
+                        Nursing Legacy
+                    </h1>
+                    <p class="text-[10px] font-bold text-slate-400 tracking-widest uppercase mt-1">Unlocked & Decrypted</p>
+                </div>
+                
+                <!-- Decrypted Text Inserted Here -->
+                <div id="decryptedLetterBody" class="text-slate-700 text-sm leading-relaxed italic text-left whitespace-pre-wrap"></div>
+                
+                <div class="mt-6 pt-4 border-t border-slate-100 text-center">
+                    <p id="letterAuthor" class="text-xs font-bold text-rose-500 uppercase"></p>
+                    <p id="letterDate" class="text-[10px] text-slate-400 font-medium"></p>
+                    <button onclick="window.location.reload()" class="mt-4 text-xs font-bold text-slate-500 hover:text-slate-800 underline transition-colors">
+                        Close & Go Back
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="unlock.js"></script>
+</body>
+</html>

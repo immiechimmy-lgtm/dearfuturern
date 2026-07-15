@@ -1,0 +1,51 @@
+/* Envelope Animation Controls */
+.envelope {
+    perspective: 1000px;
+}
+
+/* Flap transition for 180 degree folding animation */
+.envelope-flap {
+    transform-origin: top;
+    transform: rotateX(0deg);
+    z-index: 30;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Open configuration */
+.envelope-flap.open {
+    transform: rotateX(180deg);
+    z-index: 5;
+}
+
+/* Forms layout matching style guidelines */
+.input-field {
+    display: block;
+    width: 100%;
+    padding: 0.65rem 0.85rem;
+    font-size: 0.875rem;
+    color: #1e293b;
+    background-color: #ffffff;
+    border: 1px solid #fda4af;
+    border-radius: 0.5rem;
+    outline: none;
+    box-sizing: border-box;
+    transition: all 0.2s ease-in-out;
+}
+.input-field:focus {
+    border-color: #f43f5e;
+    box-shadow: 0 0 0 3px rgba(244, 63, 94, 0.2);
+}
+
+.btn-primary {
+    background-color: #f43f5e;
+    color: #ffffff;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 4px 6px -1px rgba(244, 63, 94, 0.15);
+    transition: all 0.2s ease;
+}
+.btn-primary:hover {
+    background-color: #e11d48;
+    transform: translateY(-1px);
+}
